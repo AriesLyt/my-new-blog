@@ -1,9 +1,15 @@
-import './globals.css'
+import AntdProvider from "@/components/global/antd-provider";
+import "./globals.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-  return <>{children}</>
+  return (
+    <>
+      <AntdRegistry>{AntdProvider(children)}</AntdRegistry>
+    </>
+  );
 }

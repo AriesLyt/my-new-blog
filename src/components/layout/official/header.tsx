@@ -1,9 +1,13 @@
-import { headerMap } from '@/common/layout/official'
+"use client";
 
-import Link from 'next/link'
-import { Switch } from 'antd'
+import { headerMap } from "@/common/layout/official";
+
+import Link from "next/link";
+import { Switch, ConfigProvider } from "antd";
+import { usePathname, useRouter } from "next/navigation";
 
 const OfficialHeader = () => {
+  const route = usePathname();
   return (
     <div>
       <menu className="flex items-center max-w-official mx-auto h-official">
@@ -12,19 +16,35 @@ const OfficialHeader = () => {
             <Link
               href={item.href}
               key={item.key}
-              className="w-max [&+&]:ml-6 hover:text-primary"
+              className={[
+                "w-max",
+                "[&+&]:ml-6",
+                "hover:text-primary",
+                route === item.href ? "text-primary" : "",
+              ].join(" ")}
             >
               {item.name}
             </Link>
           ))}
         </div>
-        <div>
-          <Switch />
+        <div className="flex items-center gap-x-4">
+          <ConfigProvider
+            theme={{
+              components: {
+                Switch: {
+                  trackHeight: 24,
+                  handleSize: 20,
+                },
+              },
+            }}
+          >
+            <Switch checkedChildren={"d"} unCheckedChildren={"l"} />
+          </ConfigProvider>
           <div className="w-10 h-10 rounded-full bg-primary"></div>
         </div>
       </menu>
     </div>
-  )
-}
+  );
+};
 
-export default OfficialHeader
+export default OfficialHeader;
