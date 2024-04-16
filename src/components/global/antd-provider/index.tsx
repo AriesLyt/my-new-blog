@@ -1,16 +1,18 @@
-import { ConfigProvider } from "antd";
-import color from "~/tw-config/color";
+import { ConfigProvider } from 'antd'
+import { colors } from '~/tw-config/color'
 
-export default (children: React.ReactNode) => {
+const AntdProvider = (children: React.ReactNode) => {
   return (
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: color.primary,
-        },
+          colorPrimary: colors.primary
+        }
       }}
     >
       {children}
     </ConfigProvider>
-  );
-};
+  )
+}
+
+export default AntdProvider
